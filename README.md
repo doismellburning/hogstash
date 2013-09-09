@@ -1,5 +1,7 @@
 # hogstash
 
+[![Build Status](https://travis-ci.org/doismellburning/hogstash.png?branch=master)](https://travis-ci.org/doismellburning/hogstash)
+
 Hogstash is a Haskell clone of [logstash](http://logstash.net/)
 
 ## Why?
