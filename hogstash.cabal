@@ -18,4 +18,4 @@ cabal-version:       >=1.8
 executable hogstash
   main-is:             hogstash/hogstash.hs
   -- other-modules:       
-  build-depends:       base ==4.6.*
+  build-depends:       base ==4.*
