@@ -7,14 +7,51 @@ import Hogstash.Event
 import Control.Concurrent
 import Control.Concurrent.BoundedChan as BC
 import qualified Data.ByteString.Char8 as BSC
+import Data.Map as Map
 
+data RedisInputDataType = RedisList
+
+data RedisInputConfig = RedisInputConfig
+    { addField :: Map.Map String String
+    , batchCount :: Integer
+    , dataType :: RedisInputDataType
+    , db :: Integer
+    , debug :: Bool
+    , host :: String
+    , key :: String
+    , password :: Maybe String
+    , port :: Integer
+    , tags :: [String]
+    , threads :: Integer
+    , timeout :: Integer
+    , typeLabel :: Maybe String
+    }
+
+defaultRedisInputConfig :: RedisInputConfig
+defaultRedisInputConfig = RedisInputConfig
+    { addField = Map.empty
+    , batchCount = 1
+    , dataType = RedisList
+    , db = 0
+    , debug = False
+    , host = "127.0.0.1"
+    , key = "hogstash"
+    , password = Nothing
+    , port = 6379
+    , tags = []
+    , threads = 1
+    , timeout = 5
+    , typeLabel = Nothing
+    }
 
 eventFromByteString :: BSC.ByteString -> Event
 eventFromByteString _ = Event
 
 listListen key = blpop [key] 0
 
-tmpHaxx = connect defaultConnectInfo -- FIXME Remove this
+getConnection :: RedisInputConfig -> IO Connection
+getConnection config = let connInfo = defaultConnectInfo -- TODO actually use config
+                        in connect connInfo
 
 getEvent :: Connection -> String -> BoundedChan Event -> IO ()
 

@@ -21,4 +21,5 @@ executable hogstash
   build-depends:       base ==4.*,
                        hedis ==0.6.*,
                        bytestring,
-                       BoundedChan
+                       BoundedChan,
+                       containers

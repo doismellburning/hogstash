@@ -9,7 +9,7 @@ import Control.Monad
 main = do
            channel <- newBoundedChan 10
            forkIO $ do
-               connection <- tmpHaxx
+               connection <- getConnection defaultRedisInputConfig
                forever $ getEvent connection "logstash:beaver" channel
            forkIO $ forever $ stdout channel
            forever $ threadDelay 1000 -- Block forever
