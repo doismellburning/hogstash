@@ -53,15 +53,13 @@ getConnection :: RedisInputConfig -> IO Connection
 getConnection config = let connInfo = defaultConnectInfo -- TODO actually use config
                         in connect connInfo
 
-getEvent :: Connection -> String -> BoundedChan Event -> IO ()
+getEvent :: Connection -> RedisInputConfig -> BoundedChan Event -> IO ()
 
-getEvent a b = getEvent' a (BSC.pack b)
-
-getEvent' ci key channel = do
-                                fnar <- pullEvent ci key
-                                case fnar of
-                                    Just e -> BC.writeChan channel e
-                                    Nothing -> return ()
+getEvent ci config channel = do
+                                 fnar <- pullEvent ci (BSC.pack $ key config)
+                                 case fnar of
+                                     Just e -> BC.writeChan channel e
+                                     Nothing -> return ()
 
 pullEvent :: Connection -> BSC.ByteString -> IO (Maybe Event)
 pullEvent connection key = do
