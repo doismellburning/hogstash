@@ -14,6 +14,8 @@ eventFromByteString = undefined
 
 listListen key = blpop [key] 0
 
+tmpHaxx = defaultConnectInfo -- FIXME Remove this
+
 getEvent :: ConnectInfo -> String -> BoundedChan Event -> IO ()
 
 getEvent a b = getEvent' a (BSC.pack b)
