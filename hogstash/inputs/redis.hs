@@ -2,11 +2,12 @@ module Hogstash.Inputs.Redis where
 
 import Database.Redis
 
+import Hogstash.Event
+
 import Control.Concurrent
 import Control.Concurrent.BoundedChan as BC
 import qualified Data.ByteString.Char8 as BSC
 
-data Event = Event
 
 eventFromByteString :: BSC.ByteString -> Event
 eventFromByteString = undefined

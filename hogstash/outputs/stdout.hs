@@ -1,8 +1,9 @@
 module Hogstash.Outputs.Stdout where
 
-import Control.Concurrent.BoundedChan as BC
 
-data Event = Event
+import Control.Concurrent.BoundedChan as BC
+import Hogstash.Event
+
 
 eventToString :: Event -> String
 eventToString = undefined
