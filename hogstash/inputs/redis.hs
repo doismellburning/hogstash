@@ -1,3 +1,5 @@
+module Hogstash.Inputs.Redis where
+
 import Database.Redis
 
 import Control.Concurrent
