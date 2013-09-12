@@ -14,9 +14,9 @@ eventFromByteString _ = Event
 
 listListen key = blpop [key] 0
 
-tmpHaxx = defaultConnectInfo -- FIXME Remove this
+tmpHaxx = connect defaultConnectInfo -- FIXME Remove this
 
-getEvent :: ConnectInfo -> String -> BoundedChan Event -> IO ()
+getEvent :: Connection -> String -> BoundedChan Event -> IO ()
 
 getEvent a b = getEvent' a (BSC.pack b)
 
@@ -26,10 +26,9 @@ getEvent' ci key channel = do
 									Just e -> BC.writeChan channel e
 									Nothing -> return ()
 
-pullEvent :: ConnectInfo -> BSC.ByteString -> IO (Maybe Event)
-pullEvent connect_info key = do
-									conn <- connect defaultConnectInfo
-									event_data <- runRedis conn $ listListen key
+pullEvent :: Connection -> BSC.ByteString -> IO (Maybe Event)
+pullEvent connection key = do
+									event_data <- runRedis connection $ listListen key
 									return (case event_data of
 										Left a -> Nothing
 										Right a -> extractEvent a)
