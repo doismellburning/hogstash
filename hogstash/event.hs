@@ -1,3 +1,3 @@
 module Hogstash.Event where
 
-data Event = Event
+data Event = Event deriving Show

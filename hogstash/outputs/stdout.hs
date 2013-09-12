@@ -6,7 +6,7 @@ import Hogstash.Event
 
 
 eventToString :: Event -> String
-eventToString = undefined
+eventToString = show
 
 stdout :: BoundedChan Event -> IO ()
 stdout channel = do 

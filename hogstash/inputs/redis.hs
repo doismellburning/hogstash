@@ -10,7 +10,7 @@ import qualified Data.ByteString.Char8 as BSC
 
 
 eventFromByteString :: BSC.ByteString -> Event
-eventFromByteString = undefined
+eventFromByteString _ = Event
 
 listListen key = blpop [key] 0
 
