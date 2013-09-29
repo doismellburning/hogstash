@@ -16,8 +16,8 @@ build-type:          Simple
 cabal-version:       >=1.8
 
 executable hogstash
-  main-is:             Hogstash/Hogstash.hs
-  -- other-modules:       
+  hs-source-dirs:      src
+  main-is:             Hogstash.hs
   build-depends:       base ==4.*,
                        hedis ==0.6.*,
                        bytestring,
