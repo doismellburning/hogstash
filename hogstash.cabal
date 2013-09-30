@@ -17,7 +17,7 @@ cabal-version:       >=1.8
 
 executable hogstash
   hs-source-dirs:      src
-  main-is:             Hogstash.hs
+  main-is:             Main.hs
   build-depends:       base ==4.*,
                        hedis ==0.6.*,
                        bytestring,

@@ -1,4 +1,4 @@
-module Hogstash where
+module Main where
 
 import Hogstash.Inputs.Redis
 import Hogstash.Event
