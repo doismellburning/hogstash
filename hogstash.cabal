@@ -23,3 +23,15 @@ executable hogstash
                        bytestring,
                        BoundedChan,
                        containers
+
+Test-Suite test-hogstash
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      src,
+                       test
+  main-is:             Spec.hs
+  build-depends:       base ==4.*,
+                       hedis ==0.6.*,
+                       bytestring,
+                       BoundedChan,
+                       containers,
+                       hspec
