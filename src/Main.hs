@@ -8,8 +8,11 @@ import Control.Concurrent
 import Control.Concurrent.BoundedChan
 import Control.Monad
 
+channelSize :: Int
+channelSize = 10
+
 main = do
-           channel <- newBoundedChan 10
+           channel <- newBoundedChan channelSize
            forkIO $ do
                connection <- getConnection redisInputConfig
                forever $ getEvent connection redisInputConfig channel
