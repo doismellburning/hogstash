@@ -11,3 +11,7 @@ build: configure
 .PHONY: configure
 configure:
 	cabal configure --enable-tests
+
+.PHONY: configure
+run:
+	./dist/build/hogstash/hogstash
