@@ -4,7 +4,6 @@ import Database.Redis
 
 import Hogstash.Event
 
-import Control.Concurrent
 import Control.Concurrent.BoundedChan as BC
 import qualified Data.ByteString.Char8 as BSC
 import Data.Map as Map
@@ -47,11 +46,11 @@ defaultRedisInputConfig = RedisInputConfig
 eventFromByteString :: BSC.ByteString -> Event
 eventFromByteString _ = Event
 
-listListen key = blpop [key] 0
+listListen key' = blpop [key'] 0
 
 getConnection :: RedisInputConfig -> IO Connection
-getConnection config = let connInfo = defaultConnectInfo -- TODO actually use config
-                        in connect connInfo
+getConnection _ = let connInfo = defaultConnectInfo -- TODO actually use config
+                   in connect connInfo
 
 getEvent :: Connection -> RedisInputConfig -> BoundedChan Event -> IO ()
 
@@ -62,10 +61,10 @@ getEvent ci config channel = do
                                      Nothing -> return ()
 
 pullEvent :: Connection -> BSC.ByteString -> IO (Maybe Event)
-pullEvent connection key = do
-                                    event_data <- runRedis connection $ listListen key
+pullEvent connection key' = do
+                                    event_data <- runRedis connection $ listListen key'
                                     return (case event_data of
-                                        Left a -> Nothing
+                                        Left _ -> Nothing
                                         Right a -> extractEvent a)
 
 extractEvent :: Maybe (a, BSC.ByteString) -> Maybe Event
