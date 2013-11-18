@@ -15,3 +15,7 @@ configure:
 .PHONY: configure
 run:
 	./dist/build/hogstash/hogstash
+
+.PHONY: clean
+clean:
+	cabal clean
